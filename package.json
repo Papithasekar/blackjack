@@ -1,0 +1,16 @@
+{
+  "name": "black-jack",
+  "version": "1.0.0",
+  "description": "TODO: write a description",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
