@@ -1,23 +1,43 @@
-const featuresToTest = require('../papitha/BJ/main.js');
+const featuresToTest = require('../BJ/main');
 
+const aceofclubs = {symbol: "C", rank: "A"};
+const jackofspade = {symbol: "S", rank: "J"};
+const fourofdiamond = {symbol: "D", rank: "4"};
+const tenofheart = {symbol: "H", rank: "10"};
+const ACE_OF_HEARTS = {symbol: "H", rank: "A"};
 
-//test1 to check the value of the card
+// check the value of the card
 
 test(' check the values of the card',() => {
 
-    let card = {symbol: "C", rank: "A"};
-    let value = featuresToTest.getCardValue(card);
-    expect(value).toBe(10);
+    expect(featuresToTest.getCardValue(aceofclubs)).toBe(11);
+    expect(featuresToTest.getCardValue(jackofspade)).toBe(10);
+    expect(featuresToTest.getCardValue(fourofdiamond)).toBe(4);
+    expect(featuresToTest.getCardValue(tenofheart)).toBe(10);
+});
+
+test(' check the values of a hand',() => {
+    expect(featuresToTest.getHandValue([aceofclubs, jackofspade])).toBe(21);
+    expect(featuresToTest.getHandValue([aceofclubs, jackofspade, ACE_OF_HEARTS])).toBe(32);
+
+
+
 });
 
 //test2 to check who is the winner in first deck
 
 test(' check who is the winner in first deck',() => {
 
-    let firstdeck = {
-        name: 'dealer',
-        Cards:  ["CA","D10"],
+    let p1 = {
+        name:  'sam',
+        cards:  [ aceofclubs,tenofheart],
     };
+
+    let p2 = {
+        name: 'dealer',
+        cards:  [ ACE_OF_HEARTS,jackofspade],
+    };
+
     let winner = featuresToTest.winnerOfDeck1(p1,p2);
-    expect(winner).toBe('sam');
+    expect(winner.name).toBe('sam');
 });

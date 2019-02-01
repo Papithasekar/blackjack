@@ -1,4 +1,4 @@
-module.exports = {getCardValue,suit};/*specify the function which you are creating*/
+module.exports = {getCardValue,winnerOfDeck1,getHandValue};/*specify the function which you are creating*/
 
 /*const SYMBOLS = {
     clubs: colorInBlack('C'),
@@ -16,20 +16,16 @@ function getCardValue(card) {
     let symbol = card.symbol;
     let rank = card.rank;
 
-    console.log("card in hand is " + card.rank + "of" + card.symbol);
+    console.log("[DEBUG] card in hand is " + rank+ " of " + symbol);
 
    switch(rank)
    {
        case 'A':
-
            return 11;
 
-       case '1':
-
-           return 1;
        case '2':
-
            return 2;
+
        case '3':
 
            return 3;
@@ -69,31 +65,32 @@ function getCardValue(card) {
    console.log(name);
 }
 
-function suit(){
+function winnerOfDeck1(p1,p2){
 
-    let suitname ='';
+   let valueOfHandP1 = getHandValue(p1.cards);
+   let valueOfHandP2 = getHandValue(p2.cards);
 
-    switch(suit) {
+   if((valueOfHandP1 == 21) && (valueOfHandP2 == 21) ){
 
-        case clubs :
+       console.log("p1 wins");
+       return p1;
 
-            return C;
-
-        case spades:
-
-            return S;
-
-        case hearts:
-
-            return H;
-
-        case diamonds:
-
-            return D;
-
-    }
-
+   }
+    else{
+        console.log("p2 wins");
+        return p2;
+   }
 }
 
+function getHandValue(cards){
+    let value = 0;
+
+    for(var i=0;i<cards.length;i++) {
+        let card = cards[i];
+        value = value + getCardValue(card);
+    }
+
+    return value;
+}
 // function to pick random cards
 
