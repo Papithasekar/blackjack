@@ -46,7 +46,7 @@ function continueGame(cards, player, dealer) {
     console.log("-----> cards.length= " + cards.length);
     let winner = {name : "NOBODY", cards: [] };
 
-    while ((foundAWinner === false) && (cards.length != 0)) {
+    while ((foundAWinner === false) && (cards.length !== 0)) {
         console.log("Entering the while condition");
 
         let distributedCard = cards.splice(0, 1)[0];
@@ -82,7 +82,7 @@ function getCardValue(card) {
     let symbol = card.symbol;
     let rank = card.rank;
 
-    console.log("[DEBUG] card in hand is " + rank+ " of " + symbol);
+    //console.log("[DEBUG] card in hand is " + rank+ " of " + symbol);
 
     switch(rank)
     {
@@ -214,7 +214,7 @@ function toDistributeFirstDeckCards(cards, player, dealer){
 
         let index = i;
         let distributedCard = cards.splice(0, 1)[0];
-        console.log("we took this card: "+ distributedCard.symbol+distributedCard.rank);
+       // console.log("we took this card: "+ distributedCard.symbol+distributedCard.rank);
 
         if ((index % 2) !== 1) {
             //even

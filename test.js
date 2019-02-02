@@ -2,7 +2,7 @@ const featuresToTest = require('../BJ/main');
 
 const ACE_OF_CLUB = {symbol: "C", rank: "A"};
 const JACK_OF_SPADE = {symbol: "S", rank: "J"};
-const FOUR_OF_DIAMOND = {symbol: "D", rank: "4"};
+const FOUR_OF_CLUB = {symbol: "D", rank: "4"};
 const TEN_OF_HEART = {symbol: "H", rank: "10"};
 const ACE_OF_HEART = {symbol: "H", rank: "A"};
 const TWO_OF_HEART = {symbol: "H", rank: "2"};
@@ -13,7 +13,7 @@ test(' check the values of the card',() => {
 
     expect(featuresToTest.getCardValue(ACE_OF_CLUB)).toBe(11);
     expect(featuresToTest.getCardValue(JACK_OF_SPADE)).toBe(10);
-    expect(featuresToTest.getCardValue(FOUR_OF_DIAMOND)).toBe(4);
+    expect(featuresToTest.getCardValue(FOUR_OF_CLUB)).toBe(4);
     expect(featuresToTest.getCardValue(TEN_OF_HEART)).toBe(10);
 });
 
@@ -47,7 +47,7 @@ test(' check who is the winner in first deck',() => {
 // to distribute card
 test(' to distribute the card in order',() => {
 
-    let cards = [ACE_OF_CLUB,ACE_OF_HEART,TEN_OF_HEART,FOUR_OF_DIAMOND];
+    let cards = [ACE_OF_CLUB,ACE_OF_HEART,TEN_OF_HEART,FOUR_OF_CLUB];
     let player = {
         name:  'Sam',
         cards:  [ ],
@@ -76,7 +76,7 @@ test('continueGame test1',() => {
 
     let dealer = {
         name: 'Dealer',
-        cards:  [ACE_OF_HEART, FOUR_OF_DIAMOND],
+        cards:  [ACE_OF_HEART, FOUR_OF_CLUB],
     };
 
     let winner = featuresToTest.continueGame(cards,player,dealer);
@@ -87,7 +87,7 @@ test('continueGame test1',() => {
 // test to draw card from deck
 test('test to draw card from deck',() => {
 
-    let deck = [THREE_OF_DIAMOND, FOUR_OF_DIAMOND,TEN_OF_HEART, JACK_OF_SPADE];
+    let deck = [THREE_OF_DIAMOND, FOUR_OF_CLUB,TEN_OF_HEART, JACK_OF_SPADE];
     let player = {
         name:  'Sam',
         cards:  [ACE_OF_CLUB, TWO_OF_HEART],
@@ -95,7 +95,7 @@ test('test to draw card from deck',() => {
 
     let dealer = {
         name: 'Dealer',
-        cards:  [ACE_OF_HEART, FOUR_OF_DIAMOND],
+        cards:  [ACE_OF_HEART, FOUR_OF_CLUB],
     };
 
     let winner = featuresToTest.draw(deck,player,dealer);
