@@ -28,7 +28,7 @@ function main(){
     module.exports.distributeFirstDeckCards(cards,player,dealer);
     let winnerOfDeck1  = module.exports.winnerOfDeck1(player,dealer);
 
-    if(winnerOfDeck1.name !== "NOBODY") {
+    if(winnerOfDeck1.name !== "nobody") {
         console.log(winnerOfDeck1.name);
     } else {
         console.log("[DEBUG] Work in progress ...");
@@ -79,7 +79,7 @@ function showHand(cards) {
 
 function getCardValue(card) {
 
-    let symbol = card.symbol;
+    //let symbol = card.symbol;
     let rank = card.rank;
 
     //console.log("[DEBUG] card in hand is " + rank+ " of " + symbol);
@@ -149,20 +149,20 @@ function winnerOfDeck1(player,dealer){
     let valueOfHandPlayer = getHandValue(player.cards);
     let valueOfHandDealer = getHandValue(dealer.cards);
 
-    if(valueOfHandPlayer === 21){
+    if((valueOfHandPlayer === 21) && (valueOfHandDealer === 21)){
 
         //console.log("p1 wins");
         return player;
 
-    }
-    if(valueOfHandDealer === 21){
-        return dealer;
     }
 
     if((valueOfHandPlayer === 22) && (valueOfHandDealer === 22)){
         //console.log("p2 wins");
         return dealer;
     }
+
+
+   // return player.name = 'Nobody';
     //call draw function
 
 }
@@ -173,7 +173,7 @@ function winnerOfDeck1(player,dealer){
 function draw(deck,player,dealer){
 
 
-    while(getHandValue(player.cards) < 17){
+    while( (player.name === 'Nobody') && (getHandValue(player.cards) < 17) ){
 
         player.cards.push(deck.shift());
 
@@ -182,10 +182,10 @@ function draw(deck,player,dealer){
 
         dealer.cards.push(deck.shift());
     }
-    console.log("Checking draw");
+    /*console.log("Checking draw");
     console.log(deck);
     console.log(player);
-    console.log(dealer);
+    console.log(dealer);*/
     return getWinner(player,dealer);
 
 }
@@ -194,7 +194,7 @@ function draw(deck,player,dealer){
 
 function getWinner(player,dealer){
 
-    if(getHandValue(player.cards) > getHandValue(dealer.cards)){
+    if( Math.max(getHandValue(player.cards), getHandValue(dealer.cards))){
 
         return player;
     }
@@ -204,7 +204,7 @@ function getWinner(player,dealer){
     }
 
 }
-// function to distrubute the cards in order
+// function to distribute the cards in order
 
 function toDistributeFirstDeckCards(cards, player, dealer){
 
