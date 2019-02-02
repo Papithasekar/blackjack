@@ -62,3 +62,24 @@ test(' to distribute the card in order',() => {
     expect(cards.length).toBe(0);
     expect(player.cards[1]).toBe(TEN_OF_HEART);
 });
+
+
+// to distribute card
+test('continueGame test1',() => {
+
+    let cards = [JACK_OF_SPADE];
+    let player = {
+        name:  'Sam',
+        cards:  [ACE_OF_CLUB, TEN_OF_HEART],
+    };
+
+    let dealer = {
+        name: 'Dealer',
+        cards:  [ACE_OF_HEART, FOUR_OF_DIAMOND],
+    };
+
+    let winner = featuresToTest.continueGame(cards,player,dealer);
+
+    expect(winner.name).toBe('NOBODY');
+});
+

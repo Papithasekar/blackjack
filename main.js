@@ -1,5 +1,5 @@
 'use strict';
-module.exports = {getCardValue,winnerOfDeck1,getHandValue,distributeFirstDeckCards: toDistributeFirstDeckCards};/*specify the function which you are creating*/
+module.exports = {continueGame, getCardValue,winnerOfDeck1,getHandValue,distributeFirstDeckCards: toDistributeFirstDeckCards};/*specify the function which you are creating*/
 
 const ACE_OF_CLUB = {symbol: "C", rank: "A"};
 const JACK_OF_SPADE = {symbol: "S", rank: "J"};
@@ -11,6 +11,7 @@ const ACE_OF_HEART = {symbol: "H", rank: "A"};
 function main(){
 
     let cards = [ACE_OF_CLUB,ACE_OF_HEART,TEN_OF_HEART,FOUR_OF_DIAMOND];
+    let restOfCards = [JACK_OF_SPADE];
 
     let player = {
         name:  'Sam',
@@ -24,12 +25,42 @@ function main(){
 
     console.log("Hello welcome to Black Jack world");
     module.exports.distributeFirstDeckCards(cards,player,dealer);
-    let winner  = module.exports.winnerOfDeck1(player,dealer);
-    console.log(winner.name);
+    let winnerOfDeck1  = module.exports.winnerOfDeck1(player,dealer);
+
+    if(winnerOfDeck1.name !== "NOBODY") {
+        console.log(winnerOfDeck1.name);
+    } else {
+        console.log("[DEBUG] Work in progress ...");
+        let winnerOfGame = module.exports.continueGame(restOfCards, player, dealer);
+        console.log(winnerOfGame.name);
+    }
 
     console.log("------");
     console.log(player.name +":" + showHand(player.cards));
     console.log(dealer.name +":" + showHand(dealer.cards));
+}
+
+function continueGame(cards, player, dealer) {
+    let foundAWinner = false;
+    console.log("-----> cards.length= " + cards.length);
+    let winner = {name : "NOBODY", cards: [] };
+
+    while ((foundAWinner === false) && (cards.length != 0)) {
+        console.log("Entering the while condition");
+
+        let distributedCard = cards.splice(0, 1)[0];
+        console.log("took the card: " + distributedCard.symbol + distributedCard.rank);
+
+        // draw card from 'cards'
+        // determine WHO (player or dealer) will get the card
+        // add this card to player or dealer
+        // check if there is a winner, and if found a winner:
+        // winner = ....
+        // foundAWinner = true;
+
+    }
+
+    return winner;
 }
 
 function showHand(cards) {
@@ -43,15 +74,8 @@ function showHand(cards) {
     return hand;
 }
 
-/*const SYMBOLS = {
-    clubs: colorInBlack('C'),
-    spades: colorInBlack('S'),
-    hearts: colorInRed('H'),
-    diamonds: colorInRed('D')
-}
-module.exports.SYMBOLS = SYMBOLS;*/
-
 //function for setting card values
+
 function getCardValue(card) {
 
     let symbol = card.symbol;
@@ -142,6 +166,7 @@ function winnerOfDeck1(p1,p2){
 }
 
 // function to distrubute the cards in order
+
 function toDistributeFirstDeckCards(cards, player, dealer){
 
     let nbOfCards = cards.length;
