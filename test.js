@@ -42,3 +42,23 @@ test(' check who is the winner in first deck',() => {
     let winner = featuresToTest.winnerOfDeck1(p1,p2);
     expect(winner.name).toBe('sam');
 });
+
+// to distribute card
+test(' to distribute the card in order',() => {
+
+    let cards = [ACE_OF_CLUB,ACE_OF_HEART,TEN_OF_HEART,FOUR_OF_DIAMOND];
+    let player = {
+        name:  'Sam',
+        cards:  [ ],
+    };
+
+    let dealer = {
+        name: 'Dealer',
+        cards:  [ ],
+    };
+
+    featuresToTest.distributeFirstDeckCards(cards,player,dealer);
+
+    expect(cards.length).toBe(0);
+    expect(player.cards[1]).toBe(TEN_OF_HEART);
+});
