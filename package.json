@@ -4,6 +4,7 @@
   "description": "TODO: write a description",
   "main": "main.js",
   "scripts": {
+    "start" : "node main.js",
     "test": "jest"
   },
   "keywords": [],

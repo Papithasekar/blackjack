@@ -1,5 +1,10 @@
 module.exports = {getCardValue,winnerOfDeck1,getHandValue};/*specify the function which you are creating*/
 
+function main(){
+
+    console.log("Hello welcome to Black Jack world");
+}
+
 /*const SYMBOLS = {
     clubs: colorInBlack('C'),
     spades: colorInBlack('S'),
@@ -95,3 +100,12 @@ function winnerOfDeck1(p1,p2){
 }
 
 // function to pick random cards
+
+/*
+  Main method
+ */
+
+{
+    // This is where the program starts.
+    main();
+}
