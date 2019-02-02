@@ -22,10 +22,25 @@ function main(){
         cards:  [ ],
     };
 
-    //distributeFirstDeckCards(cards,player,dealer);
-    //winnerOfDeck1(player,dealer);
     console.log("Hello welcome to Black Jack world");
+    module.exports.distributeFirstDeckCards(cards,player,dealer);
+    let winner  = module.exports.winnerOfDeck1(player,dealer);
+    console.log(winner.name);
 
+    console.log("------");
+    console.log(player.name +":" + showHand(player.cards));
+    console.log(dealer.name +":" + showHand(dealer.cards));
+}
+
+function showHand(cards) {
+    let hand="";
+    for(let i=0 ; i < cards.length; i++) {
+        let card = cards[i];
+        hand = hand + " " + card.symbol + card.rank;
+    }
+    //console.log(player.name + "cards : " + hand);
+    //console.log(dealer.name + "cards : " + hand);
+    return hand;
 }
 
 /*const SYMBOLS = {
@@ -95,11 +110,10 @@ function getCardValue(card) {
 function getHandValue(cards){
     let value = 0;
 
-    for(let i=0;i<cards.length;i++) {
+    for(let i = 0; i < cards.length; i++) {
         let card = cards[i];
         value = value + getCardValue(card);
     }
-
     return value;
 }
 
@@ -112,14 +126,19 @@ function winnerOfDeck1(p1,p2){
 
     if((valueOfHandP1 == 21) && (valueOfHandP2 == 21) ){
 
-        console.log("p1 wins");
+        //console.log("p1 wins");
         return p1;
 
     }
-    else{
-        console.log("p2 wins");
+    else if((valueOfHandP1 == 22) && (valueOfHandP2 == 22)){
+        //console.log("p2 wins");
         return p2;
     }
+    else{
+        console.log("Nobody wins in first deck, draw the cards");
+        return {name: "NOBODY", cards: []};
+    }
+
 }
 
 // function to distrubute the cards in order
@@ -128,24 +147,19 @@ function toDistributeFirstDeckCards(cards, player, dealer){
     let nbOfCards = cards.length;
 
     for (let i=0; i < nbOfCards; i++) {
-        console.log("1 --> i is: " + i);
+
         let index = i;
         let distributedCard = cards.splice(0, 1)[0];
         console.log("we took this card: "+ distributedCard.symbol+distributedCard.rank);
 
         if ((index % 2) != 1) {
-            console.log("2 ---> i is: " + i);
             //even
             player.cards.push(distributedCard);
-            console.log("pushed to player");
+
         } else {
-            console.log("3 ---> i is: " + i);
-            //odd
-            dealer.cards.push(distributedCard);
-            console.log("pushed to dealer");
-        }
-        console.log("cards.length: " + cards.length);
-        console.log(" 4 ---> i is: " + i);
+                  //odd
+                 dealer.cards.push(distributedCard);
+               }
     }
 }
 // function to pick random cards
