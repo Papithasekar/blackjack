@@ -1,5 +1,6 @@
 'use strict';
-module.exports = {continueGame, getCardValue,winnerOfDeck1,getHandValue,distributeFirstDeckCards: toDistributeFirstDeckCards};/*specify the function which you are creating*/
+module.exports = {continueGame, getCardValue,winnerOfDeck1,getHandValue,distributeFirstDeckCards: toDistributeFirstDeckCards,
+                   draw};/*specify the function which you are creating*/
 
 const ACE_OF_CLUB = {symbol: "C", rank: "A"};
 const JACK_OF_SPADE = {symbol: "S", rank: "J"};
@@ -143,28 +144,66 @@ function getHandValue(cards){
 
 //function to check who is the winner in round1
 
-function winnerOfDeck1(p1,p2){
+function winnerOfDeck1(player,dealer){
 
-    let valueOfHandP1 = getHandValue(p1.cards);
-    let valueOfHandP2 = getHandValue(p2.cards);
+    let valueOfHandPlayer = getHandValue(player.cards);
+    let valueOfHandDealer = getHandValue(dealer.cards);
 
-    if((valueOfHandP1 == 21) && (valueOfHandP2 == 21) ){
+    if(valueOfHandPlayer === 21){
 
         //console.log("p1 wins");
-        return p1;
+        return player;
 
     }
-    else if((valueOfHandP1 == 22) && (valueOfHandP2 == 22)){
+    if(valueOfHandDealer === 21){
+        return dealer;
+    }
+
+    if((valueOfHandPlayer === 22) && (valueOfHandDealer === 22)){
         //console.log("p2 wins");
-        return p2;
+        return dealer;
     }
-    else{
-        console.log("Nobody wins in first deck, draw the cards");
-        return {name: "NOBODY", cards: []};
-    }
+    //call draw function
 
 }
 
+
+// function to draw cards from deck
+
+function draw(deck,player,dealer){
+
+
+    while(getHandValue(player.cards) < 17){
+
+        player.cards.push(deck.shift());
+
+    }
+    while(getHandValue(dealer.cards) <= getHandValue(player.cards) ){
+
+        dealer.cards.push(deck.shift());
+    }
+    console.log("Checking draw");
+    console.log(deck);
+    console.log(player);
+    console.log(dealer);
+    return getWinner(player,dealer);
+
+}
+
+//function to check who has highest score
+
+function getWinner(player,dealer){
+
+    if(getHandValue(player.cards) > getHandValue(dealer.cards)){
+
+        return player;
+    }
+    else
+    {
+        return dealer;
+    }
+
+}
 // function to distrubute the cards in order
 
 function toDistributeFirstDeckCards(cards, player, dealer){
@@ -177,7 +216,7 @@ function toDistributeFirstDeckCards(cards, player, dealer){
         let distributedCard = cards.splice(0, 1)[0];
         console.log("we took this card: "+ distributedCard.symbol+distributedCard.rank);
 
-        if ((index % 2) != 1) {
+        if ((index % 2) !== 1) {
             //even
             player.cards.push(distributedCard);
 

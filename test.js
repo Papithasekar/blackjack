@@ -5,7 +5,8 @@ const JACK_OF_SPADE = {symbol: "S", rank: "J"};
 const FOUR_OF_DIAMOND = {symbol: "D", rank: "4"};
 const TEN_OF_HEART = {symbol: "H", rank: "10"};
 const ACE_OF_HEART = {symbol: "H", rank: "A"};
-
+const TWO_OF_HEART = {symbol: "H", rank: "2"};
+const THREE_OF_DIAMOND = {symbol: "H", rank: "3"};
 // check the value of the card
 
 test(' check the values of the card',() => {
@@ -64,7 +65,7 @@ test(' to distribute the card in order',() => {
 });
 
 
-// to distribute card
+// to continue game
 test('continueGame test1',() => {
 
     let cards = [JACK_OF_SPADE];
@@ -83,3 +84,21 @@ test('continueGame test1',() => {
     expect(winner.name).toBe('NOBODY');
 });
 
+// test to draw card from deck
+test('test to draw card from deck',() => {
+
+    let deck = [THREE_OF_DIAMOND, FOUR_OF_DIAMOND,TEN_OF_HEART, JACK_OF_SPADE];
+    let player = {
+        name:  'Sam',
+        cards:  [ACE_OF_CLUB, TWO_OF_HEART],
+    };
+
+    let dealer = {
+        name: 'Dealer',
+        cards:  [ACE_OF_HEART, FOUR_OF_DIAMOND],
+    };
+
+    let winner = featuresToTest.draw(deck,player,dealer);
+
+    expect(winner.name).toBe('Sam');
+});
