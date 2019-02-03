@@ -5,20 +5,20 @@ module.exports = {
     winnerOfDeck1,
     getHandValue,
     distributeFirstDeckCards,
-    draw
+    draw,
+    convertToCards
 };
 
-const ACE_OF_CLUB = {symbol: "C", rank: "A"};
-const JACK_OF_SPADE = {symbol: "S", rank: "J"};
-const FOUR_OF_DIAMOND = {symbol: "D", rank: "4"};
-const TEN_OF_HEART = {symbol: "H", rank: "10"};
-const ACE_OF_HEART = {symbol: "H", rank: "A"};
+const TEST_1 = {
+    deck1: ["CA", "HA", "H10", "D4"],
+    rest: ["SJ"]
+};
 
 
 function main(){
 
-    let cards = [ACE_OF_CLUB,ACE_OF_HEART,TEN_OF_HEART,FOUR_OF_DIAMOND];
-    let restOfCards = [JACK_OF_SPADE];
+    let cards = module.exports.convertToCards(TEST_1.deck1);
+    let restOfCards = module.exports.convertToCards(TEST_1.rest)
 
     let player = {
         name:  'Sam',
@@ -179,6 +179,25 @@ function getHandValue(cards){
         value = value + getCardValue(card);
     }
     return value;
+}
+
+function convertToCards(listOfCards) {
+
+    let cards = [];
+
+    for (let i=0; i < listOfCards.length ; i++) {
+        let card = listOfCards[i];
+        let symbol = card.slice(0, 1);
+        let rank = card.slice(1, card.length);
+
+        let cardObject = {
+            symbol: symbol,
+            rank: rank
+        };
+
+        cards.push(cardObject);
+    }
+    return cards;
 }
 
 /*

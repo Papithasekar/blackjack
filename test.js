@@ -77,3 +77,10 @@ test(' check the values of a hand',() => {
     expect(featuresToTest.getHandValue([ACE_OF_CLUB, JACK_OF_SPADE, ACE_OF_HEART])).toBe(32);
 });
 
+test(' convert string to cards',() => {
+
+    let cards = featuresToTest.convertToCards(["CA","D4", "H10"]);
+    expect(cards[0]).toEqual(ACE_OF_CLUB);
+    expect(cards[1]).toEqual(FOUR_OF_CLUB);
+    expect(cards[2]).toEqual(TEN_OF_HEART);
+});
