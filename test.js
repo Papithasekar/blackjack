@@ -65,25 +65,6 @@ test(' to distribute the card in order',() => {
 });
 
 
-// to continue game
-test('continueGame test1',() => {
-
-    let cards = [JACK_OF_SPADE];
-    let player = {
-        name:  'Sam',
-        cards:  [ACE_OF_CLUB, TEN_OF_HEART],
-    };
-
-    let dealer = {
-        name: 'Dealer',
-        cards:  [ACE_OF_HEART, FOUR_OF_CLUB],
-    };
-
-    let winner = featuresToTest.continueGame(cards,player,dealer);
-
-    expect(winner.name).toBe('NOBODY');
-});
-
 // test to draw card from deck
 test('test to draw card from deck',() => {
 
