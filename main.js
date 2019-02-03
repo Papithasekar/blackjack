@@ -49,6 +49,69 @@ function main(){
 
 
 
+//function to check who is the winner in round1
+function winnerOfDeck1(player,dealer){
+
+    let valueOfHandPlayer = getHandValue(player.cards);
+    let valueOfHandDealer = getHandValue(dealer.cards);
+
+    if( (valueOfHandPlayer === 21) && (valueOfHandDealer === 21) ) {
+        return player;
+    }
+
+    if((valueOfHandPlayer === 22) && (valueOfHandDealer === 22)){
+        return dealer;
+    }
+
+    return {name : "NOBODY", cards: [] };
+}
+
+
+// function to draw cards from deck
+function draw(deck,player,dealer){
+
+    while( (player.name === 'Nobody') && (getHandValue(player.cards) < 17) ){
+        player.cards.push(deck.shift());
+    }
+
+    while(getHandValue(dealer.cards) <= getHandValue(player.cards) ){
+        dealer.cards.push(deck.shift());
+    }
+
+    return getWinner(player,dealer);
+}
+
+//function to check who has highest score
+function getWinner(player,dealer){
+
+    if( Math.max(getHandValue(player.cards), getHandValue(dealer.cards))){
+        return player;
+    }
+
+    return dealer;
+}
+
+// function to distribute the cards in order
+function distributeFirstDeckCards(cards, player, dealer){
+
+    let nbOfCards = cards.length;
+
+    for (let i=0; i < nbOfCards; i++) {
+
+        let index = i;
+        let distributedCard = cards.splice(0, 1)[0];
+
+        if ((index % 2) !== 1) {
+            //even
+            player.cards.push(distributedCard);
+        } else {
+            //odd
+            dealer.cards.push(distributedCard);
+        }
+    }
+}
+
+
 function showHand(cards) {
     let hand="";
     for(let i=0 ; i < cards.length; i++) {
@@ -116,69 +179,6 @@ function getHandValue(cards){
         value = value + getCardValue(card);
     }
     return value;
-}
-
-//function to check who is the winner in round1
-function winnerOfDeck1(player,dealer){
-
-    let valueOfHandPlayer = getHandValue(player.cards);
-    let valueOfHandDealer = getHandValue(dealer.cards);
-
-    if( (valueOfHandPlayer === 21) && (valueOfHandDealer === 21) ) {
-        return player;
-    }
-
-    if((valueOfHandPlayer === 22) && (valueOfHandDealer === 22)){
-        return dealer;
-    }
-
-    return {name : "NOBODY", cards: [] };
-}
-
-
-// function to draw cards from deck
-function draw(deck,player,dealer){
-
-
-    while( (player.name === 'Nobody') && (getHandValue(player.cards) < 17) ){
-        player.cards.push(deck.shift());
-    }
-
-    while(getHandValue(dealer.cards) <= getHandValue(player.cards) ){
-        dealer.cards.push(deck.shift());
-    }
-
-    return getWinner(player,dealer);
-}
-
-//function to check who has highest score
-function getWinner(player,dealer){
-
-    if( Math.max(getHandValue(player.cards), getHandValue(dealer.cards))){
-        return player;
-    }
-
-    return dealer;
-}
-
-// function to distribute the cards in order
-function distributeFirstDeckCards(cards, player, dealer){
-
-    let nbOfCards = cards.length;
-
-    for (let i=0; i < nbOfCards; i++) {
-
-        let index = i;
-        let distributedCard = cards.splice(0, 1)[0];
-
-        if ((index % 2) !== 1) {
-            //even
-            player.cards.push(distributedCard);
-        } else {
-            //odd
-            dealer.cards.push(distributedCard);
-        }
-    }
 }
 
 /*

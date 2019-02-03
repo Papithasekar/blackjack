@@ -7,26 +7,7 @@ const TEN_OF_HEART = {symbol: "H", rank: "10"};
 const ACE_OF_HEART = {symbol: "H", rank: "A"};
 const TWO_OF_HEART = {symbol: "H", rank: "2"};
 const THREE_OF_DIAMOND = {symbol: "H", rank: "3"};
-// check the value of the card
 
-test(' check the values of the card',() => {
-
-    expect(featuresToTest.getCardValue(ACE_OF_CLUB)).toBe(11);
-    expect(featuresToTest.getCardValue(JACK_OF_SPADE)).toBe(10);
-    expect(featuresToTest.getCardValue(FOUR_OF_CLUB)).toBe(4);
-    expect(featuresToTest.getCardValue(TEN_OF_HEART)).toBe(10);
-});
-
-//test2 to check values in hand
-test(' check the values of a hand',() => {
-    expect(featuresToTest.getHandValue([ACE_OF_CLUB, JACK_OF_SPADE])).toBe(21);
-    expect(featuresToTest.getHandValue([ACE_OF_CLUB, JACK_OF_SPADE, ACE_OF_HEART])).toBe(32);
-
-
-
-});
-
-//test3  to check who is the winner in first deck
 
 test(' check who is the winner in first deck',() => {
 
@@ -83,3 +64,16 @@ test('test to draw card from deck',() => {
 
     expect(winner.name).toBe('Sam');
 });
+
+test(' check the values of the card',() => {
+    expect(featuresToTest.getCardValue(ACE_OF_CLUB)).toBe(11);
+    expect(featuresToTest.getCardValue(JACK_OF_SPADE)).toBe(10);
+    expect(featuresToTest.getCardValue(FOUR_OF_CLUB)).toBe(4);
+    expect(featuresToTest.getCardValue(TEN_OF_HEART)).toBe(10);
+});
+
+test(' check the values of a hand',() => {
+    expect(featuresToTest.getHandValue([ACE_OF_CLUB, JACK_OF_SPADE])).toBe(21);
+    expect(featuresToTest.getHandValue([ACE_OF_CLUB, JACK_OF_SPADE, ACE_OF_HEART])).toBe(32);
+});
+
