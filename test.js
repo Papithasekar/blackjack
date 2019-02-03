@@ -1,4 +1,4 @@
-const featuresToTest = require('../blackjack/main');
+const featuresToTest = require('../blackjack/features');
 
 const ACE_OF_CLUB = {symbol: "C", rank: "A"};
 const JACK_OF_SPADE = {symbol: "S", rank: "J"};
@@ -69,7 +69,7 @@ test('dealer wins bcoz card in  dealer card',() => {
 
     let deck = [TEN_OF_HEART ,THREE_OF_DIAMOND, FOUR_OF_CLUB, JACK_OF_SPADE];
     let player = {
-        name:  'SamTest',
+        name:  'Sam',
         cards:  [ACE_OF_CLUB, TWO_OF_HEART],
     };
 

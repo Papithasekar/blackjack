@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 module.exports = {
     getCardValue,
     winnerOfDeck1,
@@ -27,15 +29,15 @@ const TEST_3 = {
 };
 
 // Dealer wins
-const TEST_9 = {
+const finnTest = {
     deck1: ["CA", "D5", "H9", "HQ"],
     rest: ["S8"]
 };
 
 function main(){
 
-    let cards = module.exports.convertToCards(TEST_9.deck1);
-    let restOfCards = module.exports.convertToCards(TEST_9.rest)
+    let cards = module.exports.convertToCards(finnTest.deck1);
+    let restOfCards = module.exports.convertToCards(finnTest.rest);
 
     let player = {
         name:  'Sam',
@@ -47,25 +49,21 @@ function main(){
         cards:  [ ],
     };
 
-    console.log("Hello welcome to Black Jack world");
+    console.log("Hello welcome to BlackJack world");
     module.exports.distributeFirstDeckCards(cards,player,dealer);
     let winnerOfDeck1  = module.exports.winnerOfDeck1(player,dealer);
-
     if(winnerOfDeck1.name !== "NOBODY") {
         console.log(winnerOfDeck1.name);
     } else {
         let winnerOfGame = module.exports.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
         console.log(winnerOfGame.name);
     }
-
     console.log("------");
     console.log(player.name +":" + showHand(player.cards)
         + " --> " +  module.exports.getHandValue(player.cards) );
     console.log(dealer.name +":" + showHand(dealer.cards)
         + " --> " +  module.exports.getHandValue(dealer.cards));
 }
-
-
 
 //function to check who is the winner in round1
 function winnerOfDeck1(player,dealer){
@@ -83,7 +81,6 @@ function winnerOfDeck1(player,dealer){
 
     return {name : "NOBODY", cards: [] };
 }
-
 
 // function to drawCardsUntilWeHaveAWinner cards from deck
 function drawCardsUntilWeHaveAWinner(deck, player, dealer) {
@@ -140,7 +137,6 @@ function distributeFirstDeckCards(cards, player, dealer){
     }
 }
 
-
 function showHand(cards) {
     let hand="";
     for(let i=0 ; i < cards.length; i++) {
@@ -150,7 +146,7 @@ function showHand(cards) {
     return hand;
 }
 
-//function for setting card values
+//function for assigning card values
 function getCardValue(card) {
 
     let rank = card.rank;
@@ -210,6 +206,7 @@ function getHandValue(cards){
     return value;
 }
 
+//to convert card
 function convertToCards(listOfCards) {
 
     let cards = [];
