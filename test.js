@@ -1,4 +1,4 @@
-const featuresToTest = require('../BJ/main');
+const featuresToTest = require('../blackjack/main');
 
 const ACE_OF_CLUB = {symbol: "C", rank: "A"};
 const JACK_OF_SPADE = {symbol: "S", rank: "J"};
