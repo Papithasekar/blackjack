@@ -34,8 +34,8 @@ const TEST_9 = {
 
 function main(){
 
-    let cards = module.exports.convertToCards(TEST_1.deck1);
-    let restOfCards = module.exports.convertToCards(TEST_1.rest)
+    let cards = module.exports.convertToCards(TEST_9.deck1);
+    let restOfCards = module.exports.convertToCards(TEST_9.rest)
 
     let player = {
         name:  'Sam',
@@ -54,14 +54,15 @@ function main(){
     if(winnerOfDeck1.name !== "NOBODY") {
         console.log(winnerOfDeck1.name);
     } else {
-        console.log("[DEBUG] Work in progress ...");
         let winnerOfGame = module.exports.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
         console.log(winnerOfGame.name);
     }
 
     console.log("------");
-    console.log(player.name +":" + showHand(player.cards));
-    console.log(dealer.name +":" + showHand(dealer.cards));
+    console.log(player.name +":" + showHand(player.cards)
+        + " --> " +  module.exports.getHandValue(player.cards) );
+    console.log(dealer.name +":" + showHand(dealer.cards)
+        + " --> " +  module.exports.getHandValue(dealer.cards));
 }
 
 
