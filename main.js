@@ -91,10 +91,10 @@ function drawCardsUntilWeHaveAWinner(deck, player, dealer) {
         player.cards.push(deck.shift());
     }
 
-    let playerHandValue = module.exports.getHandValue(player);
+    let playerHandValue = module.exports.getHandValue(player.cards);
+
     if( playerHandValue > 21) {
          return dealer;
-
     }
 
     while( (module.exports.getHandValue(dealer.cards)
@@ -102,7 +102,7 @@ function drawCardsUntilWeHaveAWinner(deck, player, dealer) {
         dealer.cards.push(deck.shift());
     }
 
-    if (module.exports.getHandValue(player) > 21) {
+    if (module.exports.getHandValue(player.cards) > 21) {
         return player;
     }
 
