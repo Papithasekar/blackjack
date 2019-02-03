@@ -11,14 +11,14 @@ module.exports = {
 };
 
 // function to distribute the cards in order
-function distributeFirstDeckCards(cards, player, dealer){
+function distributeFirstDeckCards(restOfCards, player, dealer){
 
-    let nbOfCards = cards.length;
+    let nbOfCards = restOfCards.length;
 
     for (let i=0; i < nbOfCards; i++) {
 
         let index = i;
-        let distributedCard = cards.splice(0, 1)[0];
+        let distributedCard = restOfCards.splice(0, 1)[0];
 
         if ((index % 2) !== 1) {
             //even

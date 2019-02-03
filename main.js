@@ -2,6 +2,8 @@
 
 const features = require('../blackjack/features');
 
+
+// sam wins
 const TEST_1 = {
     deck1: ["CA", "HA", "H10", "D4"],
     rest: ["SJ"]
@@ -19,6 +21,11 @@ const TEST_3 = {
     rest: ["C7"]
 };
 
+// sam wins in first deck
+const TEST_4 = {
+    deck1: ["CA", "HA", "HJ", "DJ"],
+    rest: ["SJ"]
+};
 // Dealer wins
 const finnTest = {
     deck1: ["CA", "D5", "H9", "HQ"],
@@ -27,8 +34,8 @@ const finnTest = {
 
 function main(){
 
-   let cards = features.convertToCards(finnTest.deck1);
-   let restOfCards = features.convertToCards(finnTest.rest);
+   let cards = features.convertToCards(TEST_4.deck1);
+   let restOfCards = features.convertToCards(TEST_4.rest);
 
     let player = {
         name:  'Sam',
@@ -41,19 +48,19 @@ function main(){
     };
 
     console.log("Hello welcome to BlackJack world");
-    module.exports.distributeFirstDeckCards(cards,player,dealer);
-    let winnerOfDeck1  = module.exports.winnerOfDeck1(player,dealer);
+    features.distributeFirstDeckCards(cards,player,dealer);
+    let winnerOfDeck1  = features.winnerOfDeck1(player,dealer);
     if(winnerOfDeck1.name !== "NOBODY") {
         console.log(winnerOfDeck1.name);
     } else {
-        let winnerOfGame = module.exports.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
+        let winnerOfGame = features.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
         console.log(winnerOfGame.name);
     }
     console.log("------");
     console.log(player.name +":" + showHand(player.cards)
-        + " --> " +  module.exports.getHandValue(player.cards) );
+        + " --> " +  features.getHandValue(player.cards) );
     console.log(dealer.name +":" + showHand(dealer.cards)
-        + " --> " +  module.exports.getHandValue(dealer.cards));
+        + " --> " +  features.getHandValue(dealer.cards));
 }
 
 function showHand(cards) {
