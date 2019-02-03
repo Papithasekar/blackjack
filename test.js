@@ -47,9 +47,9 @@ test(' to distribute the card in order',() => {
 
 
 // test to draw card from deck
-test('test to draw card from deck',() => {
+test('sam wins bcoz card in hand is > dealer card',() => {
 
-    let deck = [THREE_OF_DIAMOND, FOUR_OF_CLUB,TEN_OF_HEART, JACK_OF_SPADE];
+    let deck = [THREE_OF_DIAMOND, FOUR_OF_CLUB, TEN_OF_HEART, JACK_OF_SPADE];
     let player = {
         name:  'Sam',
         cards:  [ACE_OF_CLUB, TWO_OF_HEART],
@@ -60,9 +60,27 @@ test('test to draw card from deck',() => {
         cards:  [ACE_OF_HEART, FOUR_OF_CLUB],
     };
 
-    let winner = featuresToTest.draw(deck,player,dealer);
+    let winner = featuresToTest.drawCardsUntilWeHaveAWinner(deck,player,dealer);
 
     expect(winner.name).toBe('Sam');
+});
+
+test('dealer wins bcoz card in  dealer card',() => {
+
+    let deck = [TEN_OF_HEART ,THREE_OF_DIAMOND, FOUR_OF_CLUB, JACK_OF_SPADE];
+    let player = {
+        name:  'SamTest',
+        cards:  [ACE_OF_CLUB, TWO_OF_HEART],
+    };
+
+    let dealer = {
+        name: 'Dealer',
+        cards:  [ACE_OF_HEART, FOUR_OF_CLUB],
+    };
+
+    let winner = featuresToTest.drawCardsUntilWeHaveAWinner(deck,player,dealer);
+
+    expect(winner.name).toBe('Dealer');
 });
 
 test(' check the values of the card',() => {

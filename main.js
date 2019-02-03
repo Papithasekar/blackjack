@@ -5,7 +5,7 @@ module.exports = {
     winnerOfDeck1,
     getHandValue,
     distributeFirstDeckCards,
-    draw,
+    drawCardsUntilWeHaveAWinner,
     convertToCards
 };
 
@@ -14,6 +14,23 @@ const TEST_1 = {
     rest: ["SJ"]
 };
 
+// Dealer wins at deck1
+const TEST_2 = {
+    deck1: ["CA", "HA", "DA", "SA"],
+    rest: ["SJ"]
+};
+
+// Dealer wins
+const TEST_3 = {
+    deck1: ["CA", "DA", "HA", "S7"],
+    rest: ["C7"]
+};
+
+// Dealer wins
+const TEST_9 = {
+    deck1: ["CA", "D5", "H9", "HQ"],
+    rest: ["S8"]
+};
 
 function main(){
 
@@ -34,11 +51,11 @@ function main(){
     module.exports.distributeFirstDeckCards(cards,player,dealer);
     let winnerOfDeck1  = module.exports.winnerOfDeck1(player,dealer);
 
-    if(winnerOfDeck1.name !== "nobody") {
+    if(winnerOfDeck1.name !== "NOBODY") {
         console.log(winnerOfDeck1.name);
     } else {
         console.log("[DEBUG] Work in progress ...");
-        let winnerOfGame = module.exports.continueGame(restOfCards, player, dealer);
+        let winnerOfGame = module.exports.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
         console.log(winnerOfGame.name);
     }
 
@@ -52,8 +69,8 @@ function main(){
 //function to check who is the winner in round1
 function winnerOfDeck1(player,dealer){
 
-    let valueOfHandPlayer = getHandValue(player.cards);
-    let valueOfHandDealer = getHandValue(dealer.cards);
+    let valueOfHandPlayer = module.exports.getHandValue(player.cards);
+    let valueOfHandDealer = module.exports.getHandValue(dealer.cards);
 
     if( (valueOfHandPlayer === 21) && (valueOfHandDealer === 21) ) {
         return player;
@@ -67,15 +84,26 @@ function winnerOfDeck1(player,dealer){
 }
 
 
-// function to draw cards from deck
-function draw(deck,player,dealer){
+// function to drawCardsUntilWeHaveAWinner cards from deck
+function drawCardsUntilWeHaveAWinner(deck, player, dealer) {
 
-    while( (player.name === 'Nobody') && (getHandValue(player.cards) < 17) ){
+    while( module.exports.getHandValue(player.cards) < 17 ){
         player.cards.push(deck.shift());
     }
 
-    while(getHandValue(dealer.cards) <= getHandValue(player.cards) ){
+    let playerHandValue = module.exports.getHandValue(player);
+    if( playerHandValue > 21) {
+         return dealer;
+
+    }
+
+    while( (module.exports.getHandValue(dealer.cards)
+        <= module.exports.getHandValue(player.cards)) ) {
         dealer.cards.push(deck.shift());
+    }
+
+    if (module.exports.getHandValue(player) > 21) {
+        return player;
     }
 
     return getWinner(player,dealer);
