@@ -2,40 +2,40 @@
 
 const features = require('../blackjack/features');
 
-
-// sam wins
-const TEST_1 = {
-    deck1: ["CA", "HA", "H10", "D4"],
-    rest: ["SJ"]
-};
-
 // Dealer wins at deck1
-const TEST_2 = {
+const TEST_Case1 = {
     deck1: ["CA", "HA", "DA", "SA"],
     rest: ["SJ"]
 };
 
+// sam wins in first deck
+const TEST_Case2 = {
+    deck1: ["CA", "HA", "HJ", "DJ"],
+    rest: ["SJ"]
+};
+
+// sam wins
+const TEST_Case3 = {
+    deck1: ["CA", "HA", "H10", "D4"],
+    rest: ["SJ"]
+};
+
 // Dealer wins
-const TEST_3 = {
+const TEST_4 = {
     deck1: ["CA", "DA", "HA", "S7"],
     rest: ["C7"]
 };
 
-// sam wins in first deck
-const TEST_4 = {
-    deck1: ["CA", "HA", "HJ", "DJ"],
-    rest: ["SJ"]
-};
 // Dealer wins
-const finnTest = {
+const finn_TestCase = {
     deck1: ["CA", "D5", "H9", "HQ"],
     rest: ["S8"]
 };
 
 function main(){
 
-   let cards = features.convertToCards(TEST_4.deck1);
-   let restOfCards = features.convertToCards(TEST_4.rest);
+   let cards = features.convertToCards(finn_TestCase.deck1);
+   let restOfCards = features.convertToCards(finn_TestCase.rest);
 
     let player = {
         name:  'Sam',
@@ -51,9 +51,11 @@ function main(){
     features.distributeFirstDeckCards(cards,player,dealer);
     let winnerOfDeck1  = features.winnerOfDeck1(player,dealer);
     if(winnerOfDeck1.name !== "NOBODY") {
+        console.log();
         console.log(winnerOfDeck1.name);
     } else {
         let winnerOfGame = features.drawCardsUntilWeHaveAWinner(restOfCards, player, dealer);
+        console.log();
         console.log(winnerOfGame.name);
     }
     console.log("------");
